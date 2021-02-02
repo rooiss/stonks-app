@@ -1,7 +1,15 @@
 const { pick } = require('lodash')
 const users = {}
 
-const getUser = () => {}
+const toPublicUser = (userObject) =>
+  pick(userObject, ['username', 'signUpTime'])
+
+const getUser = (username) => {
+  // checking to see if username is in the users object
+  if (users[username]) {
+    return Promise.resolve(toPublicUser(users[username]))
+  }
+}
 const createUser = ({ username, password }) => {
   // populate the users object with the username as the key
   // the value to that key is the users metadata
@@ -12,13 +20,11 @@ const createUser = ({ username, password }) => {
       password: password,
       signUpTime: new Date(),
     }
-    return Promise.resolve(pick(users[username], ['username', 'signUpTime']))
+    return Promise.resolve(toPublicUser(users[username]))
   } else {
-    return Promise.reject('username already exists')
+    return Promise.reject(new Error('username already exists'))
   }
 }
-const updateUser = () => {}
 
 exports.getUser = getUser
 exports.createUser = createUser
-exports.updateUser = updateUser

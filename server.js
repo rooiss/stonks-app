@@ -25,7 +25,15 @@ app.get('/login', (req, res) => {
 })
 
 // Post routes
-app.post('/login', (req, res) => {})
+app.post('/login', (req, res) => {
+  // check username and password
+  const { username, password } = req.body
+  if (username)
+    // call setSession
+    // can use redirect with set-cookie
+    res.set('Set-Cookie', 'my_app_session=' + sessionId)
+  res.redirect('/')
+})
 
 app.post('/signup', (req, res) => {
   const newUser = req.body
@@ -51,10 +59,13 @@ app.post('/signup', (req, res) => {
     password: newUser.password,
   })
   const sessionId = 'session-' + Math.random()
-  res.set('Set-Cookie', 'my_app_session=' + sessionId)
+  setSession(sessionId, newUser.username)
+  res.set('Set-Cookie', 'my_app_session=' + sessionId, 'Max-Age=' + 500)
   res.render('index')
 })
 
 app.listen(4500, () => {
   console.log('server listening on port 4500')
 })
+
+// cookie parser
