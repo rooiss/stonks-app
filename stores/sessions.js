@@ -16,8 +16,6 @@ const getSession = (sessionId) => {
   return Promise.resolve(null)
 }
 
-const removeSession = (sessionId) => {}
-
 exports.getSession = getSession
 exports.createSession = createSession
 

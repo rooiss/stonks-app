@@ -23,7 +23,7 @@ app.get('/signup', (req, res) => {
 })
 
 app.get('/login', (req, res) => {
-  res.render('login')
+  res.render('login', { errors: [] })
 })
 
 // Post routes
@@ -31,16 +31,25 @@ app.post(
   '/login',
   asyncHandler(async (req, res, next) => {
     // check username and password
+    const errors = []
     const userObj = await getUser(req.body.username)
-    if (
+    // if getUser returns null then error message
+    // if getUser password doesn't match return error
+    if (userObj === null) {
+      errors.push('user doesnt exist')
+    }
+    if (userObj !== null && userObj.password !== req.body.password) {
+      errors.push('password is wrong')
+    }
+    if (errors.length) {
+      res.render('login', { errors })
+    } else if (
       userObj.username === req.body.username &&
       userObj.password === req.body.password
     ) {
       createSession({ sessionId, username: req.body.username })
       res.redirect('/')
     }
-    // take err and render it?
-    //
   }),
 )
 
