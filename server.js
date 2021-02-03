@@ -76,8 +76,9 @@ app.post(
   }),
 )
 
-app.post('/logout', (req, res) => {
-  delete req.user
+app.get('/logout', (req, res) => {
+  res.set('Set-Cookie', `my_app_session=; Expires=${Date.now()}`)
+
   res.redirect('/')
 })
 
