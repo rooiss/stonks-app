@@ -2,13 +2,14 @@ const { pick } = require('lodash')
 const users = {}
 
 const toPublicUser = (userObject) =>
-  pick(userObject, ['username', 'signUpTime'])
+  pick(userObject, ['username', 'signUpTime', 'password'])
 
 const getUser = (username) => {
   // checking to see if username is in the users object
   if (users[username]) {
     return Promise.resolve(toPublicUser(users[username]))
   }
+  return Promise.resolve(null)
 }
 const createUser = ({ username, password }) => {
   // populate the users object with the username as the key

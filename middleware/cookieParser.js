@@ -1,19 +1,20 @@
 const cookieParser = (req, res, next) => {
-  if (!req.header.cookies) {
-    cookies = {}
-  } else {
-    req.header.cookie
+  let cookies = {}
+  const rawCookiesHeader = req.get('cookie')
+  console.log('rawCookiesHeader:', rawCookiesHeader)
+  if (rawCookiesHeader) {
+    const cookieObj = {}
+    rawCookiesHeader
       .split(';')
-      .map((cookie) => {
-        cookie.trim('')
-      })
+      .map((cookie) => cookie.trim(''))
       .forEach((cookie) => {
         const pairs = cookie.split('=')
         const key = pairs[0]
         const val = pairs[1]
-        cookies[key] = val
-        return cookies
+        cookieObj[key] = val
+        return cookieObj
       })
+    cookies = cookieObj
   }
   // if req.header.cookies doesnt exist then create the cookies object
   // use split to get each singular cookie
