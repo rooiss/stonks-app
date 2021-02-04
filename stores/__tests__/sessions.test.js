@@ -1,7 +1,12 @@
-const { set, get } = require('lodash')
 const { createSession, getSession } = require('../sessions')
+const { writeFileSync } = require('fs')
+const path = require('path')
+const filePath = path.resolve(__dirname, '../__fixtures__/sessions.test.json')
 
 describe('the session module', () => {
+  beforeEach(() => {
+    writeFileSync(filePath, '{}', 'utf8')
+  })
   describe('createSession', () => {
     it('returns a promise that resolves with sessionId', async () => {
       const sessionId = await createSession({

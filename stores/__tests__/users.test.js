@@ -1,6 +1,12 @@
 const { getUser, createUser } = require('../users')
+const { writeFileSync } = require('fs')
+const path = require('path')
+const filePath = path.resolve(__dirname, '../__fixtures__/users.test.json')
 
 describe('the users module', () => {
+  afterEach(() => {
+    writeFileSync(filePath, '{}', 'utf8')
+  })
   describe('createUser', () => {
     it('returns a promise that resolves with the new user object', async () => {
       const user = await createUser({ username: 'rooiss', password: 'rooiss' })

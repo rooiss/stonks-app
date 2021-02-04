@@ -1,30 +1,77 @@
+const path = require('path')
 const { pick } = require('lodash')
-const users = {}
+const { readFile, writeFile } = require('fs')
 
-const toPublicUser = (userObject) =>
-  pick(userObject, ['username', 'signUpTime', 'password'])
+const filePath =
+  process.env.NODE_ENV === 'test'
+    ? path.resolve(__dirname, './__fixtures__/users.test.json')
+    : path.resolve(__dirname, './users.json')
+
+console.log('process.env.NODE_ENV:', process.env.NODE_ENV)
+
+const toPublicUser = (userObject) => {
+  const parsedObj = pick(userObject, ['username', 'signUpTime', 'password'])
+  parsedObj.signUpTime = new Date(parsedObj.signUpTime)
+  return parsedObj
+}
 
 const getUser = (username) => {
   // checking to see if username is in the users object
-  if (users[username]) {
-    return Promise.resolve(toPublicUser(users[username]))
-  }
-  return Promise.resolve(null)
+  return new Promise((resolve, reject) => {
+    // read file
+    readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        return reject(err)
+      }
+      // parse
+      let users
+      try {
+        users = JSON.parse(data)
+      } catch (e) {
+        return reject(e)
+      }
+      // getUser
+      if (users[username]) {
+        return resolve(toPublicUser(users[username]))
+      }
+      return resolve(null)
+    })
+  })
 }
 const createUser = ({ username, password }) => {
-  // populate the users object with the username as the key
-  // the value to that key is the users metadata
-  // make sure you return a promise
-  if (!users[username]) {
-    users[username] = {
-      username: username,
-      password: password,
-      signUpTime: new Date(),
-    }
-    return Promise.resolve(toPublicUser(users[username]))
-  } else {
-    return Promise.reject(new Error('username already exists'))
-  }
+  return new Promise((resolve, reject) => {
+    readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        return reject(err)
+      }
+      // parse
+      let users
+      try {
+        users = JSON.parse(data)
+      } catch (e) {
+        return reject(e)
+      }
+      // creatingUser
+      if (!users[username]) {
+        users[username] = {
+          username: username,
+          password: password,
+          signUpTime: new Date(),
+        }
+        // serialize updated users object
+        const newUserData = JSON.stringify(users)
+        // write to the file
+        writeFile(filePath, newUserData, 'utf8', (err) => {
+          if (err) {
+            return reject(err)
+          }
+          return resolve(toPublicUser(users[username]))
+        })
+      } else {
+        return reject(new Error('username already exists'))
+      }
+    })
+  })
 }
 
 exports.getUser = getUser
