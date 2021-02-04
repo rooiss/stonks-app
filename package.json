@@ -4,8 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "test:watch": "jest --watch"
+    "start": "NODE_ENV=development nodemon server.js",
+    "test:watch": "jest --watch",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
