@@ -1,12 +1,9 @@
 const { createSession, getSession } = require('../sessions')
-const { writeFileSync } = require('fs')
-const path = require('path')
-const filePath = path.resolve(__dirname, '../__fixtures__/sessions.test.json')
+const fs = require('fs')
+
+jest.mock('fs')
 
 describe('the session module', () => {
-  beforeEach(() => {
-    writeFileSync(filePath, '{}', 'utf8')
-  })
   describe('createSession', () => {
     it('returns a promise that resolves with sessionId', async () => {
       const sessionId = await createSession({
@@ -22,7 +19,7 @@ describe('the session module', () => {
       expect(fing.username).toEqual('rooiss2')
     })
     it('returns a promise that resolves to null when theres no session', async () => {
-      const ting = await getSession('gaybears')
+      const ting = await getSession('Stonks')
       expect(ting).toBeNull()
     })
   })

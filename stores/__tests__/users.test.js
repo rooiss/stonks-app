@@ -1,6 +1,5 @@
 const fs = require('fs')
 const { getUser, createUser } = require('../users')
-const path = require('path')
 
 jest.mock('fs')
 
@@ -24,9 +23,6 @@ describe('the users module', () => {
   describe('getUser', () => {
     it('returns a promise that resolves with the user object', async () => {
       await createUser({ username: 'rooiss3', password: 'rooiss3' })
-      // toEqual can take an object as an argument and it will
-      // call getUser
-
       const user = await getUser('rooiss3')
       expect(user.username).toEqual('rooiss3')
       expect(user.signUpTime).toBeInstanceOf(Date)
