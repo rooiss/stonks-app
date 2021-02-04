@@ -7,8 +7,6 @@ const filePath =
     ? path.resolve(__dirname, './__fixtures__/users.test.json')
     : path.resolve(__dirname, './users.json')
 
-console.log('process.env.NODE_ENV:', process.env.NODE_ENV)
-
 const toPublicUser = (userObject) => {
   const parsedObj = pick(userObject, ['username', 'signUpTime', 'password'])
   parsedObj.signUpTime = new Date(parsedObj.signUpTime)
@@ -58,6 +56,7 @@ const createUser = ({ username, password }) => {
           password: password,
           signUpTime: new Date(),
         }
+        console.log(`users[username]`, users[username])
         // serialize updated users object
         const newUserData = JSON.stringify(users)
         // write to the file
