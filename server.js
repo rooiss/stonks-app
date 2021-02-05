@@ -4,6 +4,7 @@ const { cookieParser } = require('./middleware/cookieParser')
 const { createSession, getSession } = require('./stores/sessions')
 const { createUser, getUser } = require('./stores/users')
 const { sessionMiddleware } = require('./middleware/sessionMiddleware')
+const { userMiddleware } = require('./middleware/userMiddleware')
 const app = express()
 
 app.use(express.urlencoded({ extended: true }))
@@ -11,6 +12,7 @@ app.use(express.json())
 
 app.use(cookieParser)
 app.use(sessionMiddleware)
+app.use(userMiddleware)
 app.set('view engine', 'ejs')
 
 // Get routes

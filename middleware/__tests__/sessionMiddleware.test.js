@@ -13,7 +13,7 @@ describe('the session middleware', () => {
     await sessionMiddleware(mockReq, mockRes, mockNext)
     expect(mockReq.session).toEqual({ username: 'foo' })
   })
-  it('doesnt attach to anything to req.session when the cookie doesnt exist', async () => {
+  it('doesnt attach anything to req.session when the cookie doesnt exist', async () => {
     const mockReq = {}
     const mockRes = {}
     const mockNext = jest.fn()
