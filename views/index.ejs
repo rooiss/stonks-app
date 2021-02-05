@@ -8,14 +8,9 @@
 <body>
   <h1>A learning App for learning people who learn things</h1>
   <% if (req.session) { %>
+    <%- include('nav', {}); %>
     <p style="color: red;">You FINALLY LOGGED IN!! <%= req.session.username %></p>
     <p><a href="/logout">Log Out</a></p>
-    <form action="/stonkticker" method="POST">
-      <h3>Your ticket to the moon</h3>
-      <label for="">Stonk Ticker</label>
-      <input type="text">
-      <input type="submit">
-    </form>
   <% } %>
   <% if (!req.session) { %>
     <p><a href="/login">Login here, diamond hands</a></p>

@@ -6,7 +6,7 @@ module.exports = {
     cb(null)
   }),
   readFile: jest.fn((filePath, encoding, cb) => cb(null, mockFileJson)),
-  reset: () => {
-    mockFileJson = '{}'
+  _reset: (content) => {
+    mockFileJson = content
   },
 }
