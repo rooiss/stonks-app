@@ -2,10 +2,7 @@ const path = require('path')
 const { pick } = require('lodash')
 const { readFile, writeFile } = require('fs')
 
-const filePath =
-  process.env.NODE_ENV === 'test'
-    ? path.resolve(__dirname, './__fixtures__/users.test.json')
-    : path.resolve(__dirname, './users.json')
+const filePath = path.resolve(__dirname, './users.json')
 
 const toPublicUser = (userObject) => {
   const parsedObj = pick(userObject, ['username', 'signUpTime', 'password'])

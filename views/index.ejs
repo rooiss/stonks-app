@@ -10,6 +10,12 @@
   <% if (req.user) { %>
     <p style="color: red;">You FINALLY LOGGED IN!! <%= req.user.username %></p>
     <p><a href="/logout">Log Out</a></p>
+    <form action="/stonkticker" method="POST">
+      <h3>Your ticket to the moon</h3>
+      <label for="">Stonk Ticker</label>
+      <input type="text">
+      <input type="submit">
+    </form>
   <% } %>
   <% if (!req.user) { %>
     <p><a href="/login">Login here, diamond hands</a></p>

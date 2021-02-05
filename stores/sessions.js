@@ -16,7 +16,7 @@ const createSession = ({ username }) => {
       } catch (e) {
         return reject(e)
       }
-      // create user
+      // create session
       const sessionId = 'session-' + Math.random()
       sessions[sessionId] = {
         username: username,

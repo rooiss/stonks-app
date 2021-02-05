@@ -32,7 +32,8 @@ app.post(
   asyncHandler(async (req, res, next) => {
     // check username and password
     const errors = []
-    const userObj = await getUser(req.body.username)
+    const loginUsername = req.body.username
+    const userObj = await getUser(loginUsername)
     // if getUser returns null then error message
     // if getUser password doesn't match return error
     if (userObj === null) {
@@ -44,10 +45,11 @@ app.post(
     if (errors.length) {
       res.render('login', { errors })
     } else if (
-      userObj.username === req.body.username &&
+      userObj.username === loginUsername &&
       userObj.password === req.body.password
     ) {
-      createSession({ sessionId, username: req.body.username })
+      const sessionId = await createSession({ username: loginUsername })
+      res.set('Set-Cookie', 'my_app_session=' + sessionId)
       res.redirect('/')
     }
   }),
@@ -74,12 +76,11 @@ app.post(
     if (errors.length) {
       res.render('signup', { errors })
     }
-    await createUser(newUser.username, {
+    await createUser({
       username: newUser.username,
       password: newUser.password,
     })
     const sessionId = await createSession({ username: newUser.username })
-    // console.log('sessionId:', sessionId)
     res.set('Set-Cookie', 'my_app_session=' + sessionId)
     res.redirect('/')
   }),
