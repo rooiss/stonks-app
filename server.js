@@ -3,14 +3,14 @@ const { asyncHandler } = require('./utils/asyncHandler')
 const { cookieParser } = require('./middleware/cookieParser')
 const { createSession, getSession } = require('./stores/sessions')
 const { createUser, getUser } = require('./stores/users')
-const { userObj } = require('./middleware/userObj')
+const { sessionMiddleware } = require('./middleware/sessionMiddleware')
 const app = express()
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 app.use(cookieParser)
-app.use(userObj)
+app.use(sessionMiddleware)
 app.set('view engine', 'ejs')
 
 // Get routes

@@ -1,6 +1,6 @@
 exports.asyncHandler = (handler) => {
-  return (req, res, next) => {
-    handler(req, res, next).catch((e) => {
+  return async (req, res, next) => {
+    return handler(req, res, next).catch((e) => {
       next(e)
     })
   }
