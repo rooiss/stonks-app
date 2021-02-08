@@ -7,12 +7,24 @@
 </head>
 <body>
   <%- include('nav', {}); %>
-  <form action="/stonkticker" method="POST">
-    <h3>Your ticket to the moon</h3>
+  <% if (stonks.length) { %>
+    <h1>Your Saved Stonks</h1>
+    <ul>
+      <% stonks.forEach(function(stonk){ %>
+        <li><%= stonk.ticker %></li>
+        <% }); %>
+      </ul>
+      <% } %>
+    <form action="/stonks" method="POST">
+      <h3>Your ticket to the moon</h3>
+        <% if (errors.length) { %>
+          <% errors.forEach(function(error){ %>
+              <p><%= error %></p>
+              <% }); %>
+        <% } %>
     <label for="">Stonk Ticker</label>
-    <input type="text">
+    <input type="text" name="tickerSymbol">
     <input type="submit">
   </form>
-  
 </body>
 </html>
