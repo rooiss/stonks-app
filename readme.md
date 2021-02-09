@@ -9,7 +9,7 @@
   - [x] pass in the list of stonks to the template
 - [x] add empty elements where prices will go for each stonk
   - [x] each empty element should have an id using the ticker
-- [ ] on page load make an ajax request to get the prices for all tickers
+- [x] on page load make an ajax request to get the prices for all tickers
   - [x] fill in the empty elements with appropriate prices
 - [ ] if the market is open make another ajax request every 3 seconds
 
@@ -33,3 +33,27 @@
   - [x] get stonks for the given user
   - [x] fetch prices from API
   - [x] return results
+
+## stonk page
+
+### frontend requirements:
+
+- [ ] new ejs template for single stock page metadata
+  - [ ] show various metadata from api
+  - [ ] render DD for this stonk and user, using markdown to HTML converter (DD is stored as markdown)
+  - [ ] add link under rendered DD to edit the DD
+- [ ] new ejs template for updating DD
+  - [ ] form for updating DD (method = POST, action is to the new POST endpoint for upserting DD)
+  - [ ] textarea containing existing markdown DD (if there is any)
+  - [ ] submit button
+
+### backend requirements:
+
+- [ ] GET end point for rendering single stonk page
+  - [ ] should have param in url for ticker
+- [ ] add two methods to the stonks store
+  - [ ] upsertDD (insert or update)
+  - [ ] getDD (takes two arg, username and ticker)
+  - [ ] create another method for metadata
+- [ ] POST end point for upserting DD for a given ticker
+  - [ ] upon success redirect to metadata stonk page with param
