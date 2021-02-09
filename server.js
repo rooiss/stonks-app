@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express')
 const { asyncHandler } = require('./utils/asyncHandler')
 const { cookieParser } = require('./middleware/cookieParser')
@@ -7,6 +9,8 @@ const { sessionMiddleware } = require('./middleware/sessionMiddleware')
 const { userMiddleware } = require('./middleware/userMiddleware')
 const { saveStonk, getStonksByUsername } = require('./stores/stonks')
 const { protectedRoute } = require('./middleware/protectedRoute')
+const { getStonkPrices } = require('./stores/stonkData')
+
 const app = express()
 
 app.use(express.urlencoded({ extended: true }))
@@ -30,6 +34,7 @@ app.get('/signup', (req, res) => {
 app.get('/login', (req, res) => {
   res.render('login', { errors: [] })
 })
+
 app.get(
   '/stonks',
   protectedRoute,
@@ -44,6 +49,18 @@ app.get('/logout', (req, res) => {
   res.set('Set-Cookie', `my_app_session=; Expires=${Date.now()}`)
   res.redirect('/')
 })
+app.get(
+  '/api/stonks',
+  protectedRoute,
+  asyncHandler(async (req, res) => {
+    const username = req.user.username
+    const stonks = await getStonksByUsername({ username })
+    const prices = await getStonkPrices({ tickers: stonks })
+    res.json({
+      stonks: prices,
+    })
+  }),
+)
 
 // Post routes
 app.post(
@@ -125,6 +142,9 @@ app.post(
     res.redirect('/stonks')
   }),
 )
+
+app.use(express.static('public'))
+
 app.listen(4500, () => {
   console.log('server listening on port 4500')
 })

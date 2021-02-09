@@ -11,7 +11,7 @@
     <h1>Your Saved Stonks</h1>
     <ul>
       <% stonks.forEach(function(stonk){ %>
-        <li><%= stonk.ticker %></li>
+        <li><%= stonk.ticker %>: <span id="ticker-<%= stonk.ticker %>"></span></li>
         <% }); %>
       </ul>
       <% } %>
@@ -27,4 +27,5 @@
     <input type="submit">
   </form>
 </body>
+<script src="/js/stonks-page.js"></script>
 </html>
