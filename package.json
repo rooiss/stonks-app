@@ -8,6 +8,15 @@
     "test:watch": "jest --watch",
     "test": "jest"
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/vendor/**"
+    ],
+    "coverageDirectory": "coverage",
+    "collectCoverage": true
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
