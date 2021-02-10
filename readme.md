@@ -1,3 +1,12 @@
+# STONKS
+
+## Tech Debt
+
+- [ ] convert project to typescript
+- [ ] move routes to separate route files, under `/routes/*`
+- [ ] prettier config
+- [ ] continuous integration
+
 ## stonks page
 
 ### frontend requirements:
@@ -38,8 +47,8 @@
 
 ### frontend requirements:
 
-- [ ] new ejs template for single stock page metadata
-  - [ ] show various metadata from api
+- [ ] new ejs template for single stonk metadata
+  - [x] show various metadata from api
   - [ ] render DD for this stonk and user, using markdown to HTML converter (DD is stored as markdown)
   - [ ] add link under rendered DD to edit the DD
 - [ ] new ejs template for updating DD
@@ -51,9 +60,9 @@
 
 - [ ] GET end point for rendering single stonk page
   - [ ] should have param in url for ticker
-- [ ] add two methods to the stonks store
+- [ ] add methods to the stonks store
+  - [ ] getStonkData
   - [ ] upsertDD (insert or update)
   - [ ] getDD (takes two arg, username and ticker)
-  - [ ] create another method for metadata
 - [ ] POST end point for upserting DD for a given ticker
   - [ ] upon success redirect to metadata stonk page with param
