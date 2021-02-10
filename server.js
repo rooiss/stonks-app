@@ -9,7 +9,8 @@ const { sessionMiddleware } = require('./middleware/sessionMiddleware')
 const { userMiddleware } = require('./middleware/userMiddleware')
 const { saveStonk, getStonksByUsername } = require('./stores/stonks')
 const { protectedRoute } = require('./middleware/protectedRoute')
-const { getStonkPrices } = require('./stores/stonkData')
+const { getStonkPrices, getStonkData } = require('./stores/externalStonkData')
+const { getDD, upsertDD } = require('./stores/internalStonkData')
 
 const app = express()
 
@@ -38,7 +39,6 @@ app.get('/login', (req, res) => {
 app.get(
   '/stonks',
   protectedRoute,
-
   asyncHandler(async (req, res) => {
     const username = req.user.username
     const stonks = await getStonksByUsername({ username })
@@ -61,17 +61,38 @@ app.get(
     })
   }),
 )
+app.get(
+  '/stonks/:ticker',
+  asyncHandler(async (req, res) => {
+    // param is the ticker
+    const ticker = req.params.ticker
+    const username = req.user.username
+    const stonkData = await getStonkData({ ticker })
+    const userDD = await getDD({ ticker, username })
+    res.render('stonk', { req, stonkData, userDD })
+  }),
+)
+app.get(
+  '/stonks/:ticker/upsert',
+  asyncHandler(async (req, res) => {
+    const ticker = req.params.ticker
+    const username = req.user.username
+    const userDD = await getDD({ ticker, username })
+    console.log(`userDD`, userDD)
+    res.render('stonkDDedit', { userDD })
+  }),
+)
 
 // Post routes
 app.post(
   '/login',
   asyncHandler(async (req, res, next) => {
-    // check username and password
     const errors = []
     const loginUsername = req.body.username
     const userObj = await getUser(loginUsername)
     // if getUser returns null then error message
     // if getUser password doesn't match return error
+    // validatation
     if (userObj === null) {
       errors.push('user doesnt exist')
     }
@@ -140,6 +161,18 @@ app.post(
     }
     await saveStonk({ username, ticker })
     res.redirect('/stonks')
+  }),
+)
+
+app.post(
+  '/upsertDD',
+  protectedRoute,
+  asyncHandler(async (req, res) => {
+    const username = req.user.username
+    const dd = req.body.dd
+    const ticker = req.params.ticker
+    await upsertDD({ username, ticker, dd })
+    res.redirect('/stonks/:ticker')
   }),
 )
 

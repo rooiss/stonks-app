@@ -11,7 +11,7 @@
     <h1>Your Saved Stonks</h1>
     <ul>
       <% stonks.forEach(function(stonk){ %>
-        <li><%= stonk.ticker %>: <span id="ticker-<%= stonk.ticker %>"></span></li>
+        <li><a href="/stonks/<%= stonk.ticker %>"><%= stonk.ticker %></a>: <span id="ticker-<%= stonk.ticker %>"></span></li>
         <% }); %>
       </ul>
       <% } %>

@@ -39,7 +39,7 @@ const saveStonk = ({ username, ticker }) => {
         if (err) {
           return reject(err)
         }
-        // do i return something if all im doing is saving it to the json file
+        // not passing anything into resolve
         return resolve()
       })
     })

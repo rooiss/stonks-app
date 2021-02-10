@@ -6,7 +6,7 @@ const getStonkPrices = async ({ tickers }) => {
       url: `https://api.tiingo.com/tiingo/daily/${ticker}/prices`,
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Token 14e269bd43688dbf9198e7d5f3f161ede1d02530',
+        Authorization: `Token ${process.env.TIINGO_TOKEN}`,
       },
     }
     return new Promise((resolve, reject) => {
@@ -19,4 +19,21 @@ const getStonkPrices = async ({ tickers }) => {
   return await Promise.all(tickerPromises)
 }
 
+const getStonkData = async ({ ticker }) => {
+  const requestOptions = {
+    url: `https://api.tiingo.com/tiingo/daily/${ticker}`,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Token ${process.env.TIINGO_TOKEN}`,
+    },
+  }
+  return new Promise((resolve, reject) => {
+    request(requestOptions, (error, response, body) => {
+      const data = JSON.parse(body)
+      return resolve({ data })
+    })
+  })
+}
+
 exports.getStonkPrices = getStonkPrices
+exports.getStonkData = getStonkData

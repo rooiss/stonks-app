@@ -1,1 +1,7 @@
-[{"username":"rooiss","ticker":"GME"},{"username":"rooiss","ticker":"BB"},{"username":"rooiss","ticker":"AMC"},{"username":"rooiss","ticker":"NAKD"},{"username":"rooiss","ticker":"VALE"}]
+[
+  { "username": "rooiss", "ticker": "GME" },
+  { "username": "rooiss", "ticker": "BB" },
+  { "username": "rooiss", "ticker": "AMC" },
+  { "username": "rooiss", "ticker": "NAKD" },
+  { "username": "rooiss", "ticker": "VALE" }
+]
