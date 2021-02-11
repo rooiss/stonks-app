@@ -4,6 +4,7 @@
 
 - [ ] convert project to typescript
 - [ ] move routes to separate route files, under `/routes/*`
+- [ ] move json read logic into utility function(s) for stores
 - [ ] prettier config
 - [ ] continuous integration
 

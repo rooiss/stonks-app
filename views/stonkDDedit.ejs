@@ -7,8 +7,8 @@
   <title>Document</title>
 </head>
 <body>
-  <form method="POST" action="/upsertDD">
-    <textarea name="dd" id="" cols="30" rows="10" placeholder="<%= userDD.dd %>"></textarea>
+  <form method="POST" action="/upsertDD/<%= stonk.ticker %>">
+    <textarea name="dd" id="" cols="30" rows="10" placeholder="<%= stonk.dd %>"></textarea>
     <input type="submit">
   </form>
 </body>

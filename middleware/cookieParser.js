@@ -1,7 +1,6 @@
 const cookieParser = (req, res, next) => {
   let cookies = {}
   const rawCookiesHeader = req.get('cookie')
-  console.log('rawCookiesHeader:', rawCookiesHeader)
   if (rawCookiesHeader) {
     const cookieObj = {}
     rawCookiesHeader

@@ -9,4 +9,11 @@ module.exports = {
   _reset: (content) => {
     mockFileJson = content
   },
+  promises: {
+    writeFile: jest.fn((filePath, data, encoding) => {
+      mockFileJson = data
+      return Promise.resolve(null)
+    }),
+    readFile: jest.fn((filePath, encoding) => Promise.resolve(mockFileJson)),
+  },
 }

@@ -1,12 +1,12 @@
 const { _reset } = require('fs')
-const { getStonksByUsername, saveStonk } = require('../stonks')
+const { getStonksByUsername, saveStonk } = require('../internalStonkData')
 jest.mock('fs')
 
 describe('the stonks module', () => {
   beforeEach(() => {
     _reset('[]')
   })
-  it('gets all stonks by susername', async () => {
+  it('gets all stonks by username', async () => {
     const notRando = 'rooiss'
     const randoname = 'randotron'
     await saveStonk({ username: notRando, ticker: 'GME' })

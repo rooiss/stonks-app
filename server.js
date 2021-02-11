@@ -7,10 +7,14 @@ const { createSession, getSession } = require('./stores/sessions')
 const { createUser, getUser } = require('./stores/users')
 const { sessionMiddleware } = require('./middleware/sessionMiddleware')
 const { userMiddleware } = require('./middleware/userMiddleware')
-const { saveStonk, getStonksByUsername } = require('./stores/stonks')
+const {
+  saveStonk,
+  getStonksByUsername,
+  upsertDD,
+  getStonk,
+} = require('./stores/internalStonkData')
 const { protectedRoute } = require('./middleware/protectedRoute')
 const { getStonkPrices, getStonkData } = require('./stores/externalStonkData')
-const { getDD, upsertDD } = require('./stores/internalStonkData')
 
 const app = express()
 
@@ -64,12 +68,12 @@ app.get(
 app.get(
   '/stonks/:ticker',
   asyncHandler(async (req, res) => {
-    // param is the ticker
+    // params is the ticker
     const ticker = req.params.ticker
     const username = req.user.username
     const stonkData = await getStonkData({ ticker })
-    const userDD = await getDD({ ticker, username })
-    res.render('stonk', { req, stonkData, userDD })
+    const stonk = await getStonk({ ticker, username })
+    res.render('stonk', { req, stonkData, stonk })
   }),
 )
 app.get(
@@ -77,9 +81,8 @@ app.get(
   asyncHandler(async (req, res) => {
     const ticker = req.params.ticker
     const username = req.user.username
-    const userDD = await getDD({ ticker, username })
-    console.log(`userDD`, userDD)
-    res.render('stonkDDedit', { userDD })
+    const stonk = await getStonk({ ticker, username })
+    res.render('stonkDDedit', { stonk })
   }),
 )
 
@@ -90,8 +93,6 @@ app.post(
     const errors = []
     const loginUsername = req.body.username
     const userObj = await getUser(loginUsername)
-    // if getUser returns null then error message
-    // if getUser password doesn't match return error
     // validatation
     if (userObj === null) {
       errors.push('user doesnt exist')
@@ -149,6 +150,7 @@ app.post(
   asyncHandler(async (req, res) => {
     const ticker = req.body.tickerSymbol
     const username = req.user.username
+    const dd = ''
     const errors = []
     const stonks = await getStonksByUsername({ username })
     if (ticker === '') {
@@ -159,20 +161,24 @@ app.post(
       // have to have a return statement for the render if there is another render
       // conditional statements need return if you want control flow to end
     }
-    await saveStonk({ username, ticker })
+    await saveStonk({ username, ticker, dd })
     res.redirect('/stonks')
   }),
 )
 
 app.post(
-  '/upsertDD',
+  '/upsertDD/:ticker',
   protectedRoute,
   asyncHandler(async (req, res) => {
     const username = req.user.username
     const dd = req.body.dd
     const ticker = req.params.ticker
+    console.log(`req.params`, req.params)
+    // do i need this here?
+    // should i be passing the return value of getStonk into upsert?
+    // const stonk = await getStonk({ username, ticker })
     await upsertDD({ username, ticker, dd })
-    res.redirect('/stonks/:ticker')
+    res.redirect(`/stonks/${ticker}`)
   }),
 )
 
@@ -181,6 +187,3 @@ app.use(express.static('public'))
 app.listen(4500, () => {
   console.log('server listening on port 4500')
 })
-
-// where does createSession need to be implemented
-// post login and post sign up
