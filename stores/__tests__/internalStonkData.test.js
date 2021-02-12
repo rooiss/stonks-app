@@ -1,8 +1,13 @@
 const { _reset } = require('fs')
-const { getStonksByUsername, saveStonk } = require('../internalStonkData')
+const {
+  getStonksByUsername,
+  saveStonk,
+  getStonk,
+  upsertDD,
+} = require('../internalStonkData')
 jest.mock('fs')
 
-describe('the stonks module', () => {
+describe('the internal stonks module', () => {
   beforeEach(() => {
     _reset('[]')
   })
@@ -20,5 +25,29 @@ describe('the stonks module', () => {
       { username: notRando, ticker: 'AMC' },
       { username: notRando, ticker: 'BB' },
     ])
+  })
+  it('gets a single stonk by username and ticker', async () => {
+    await saveStonk({ username: 'notRando', ticker: 'GME' })
+    await saveStonk({ username: 'notRando', ticker: 'AMC' })
+    const stonk = await getStonk({ username: 'notRando', ticker: 'GME' })
+    expect(stonk).toEqual({ username: 'notRando', ticker: 'GME' })
+  })
+  it('updates the dd for the stonk', async () => {
+    await saveStonk({
+      username: 'notRando',
+      ticker: 'AMC',
+      dd: '',
+    })
+    await upsertDD({
+      username: 'notRando',
+      ticker: 'AMC',
+      dd: 'boom roasted',
+    })
+    const smoothbrain = await getStonk({ username: 'notRando', ticker: 'AMC' })
+    expect(smoothbrain).toEqual({
+      username: 'notRando',
+      ticker: 'AMC',
+      dd: 'boom roasted',
+    })
   })
 })
