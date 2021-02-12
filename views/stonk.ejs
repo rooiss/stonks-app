@@ -15,7 +15,10 @@
         <li><%= stonkData.data[key] %></li>
       </ul>
     <% }); %>
-    <a href="/stonks/<%= req.params.ticker %>/upsert">DD</a>
+    <div>
+      <%- dd %>
+    </div>
+    <button><a href="/stonks/<%= req.params.ticker %>/upsert">edit DD</a></button>
   </ul>
 </body>
 </html>

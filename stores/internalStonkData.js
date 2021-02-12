@@ -54,11 +54,8 @@ const upsertDD = async ({ username, ticker, dd }) => {
   const stonk = stonks.find(
     (stonk) => stonk.username === username && stonk.ticker === ticker,
   )
-  // console.log(`stonk upsert dd:`, stonk.dd)
   stonk.dd = dd
-  // console.log(`stonk upsert dd:`, stonk.dd)
   const savedStonk = JSON.stringify(stonks)
-  // console.log(`savedStonk`, savedStonk)
   await writeFile(filePath, savedStonk, 'utf8')
   return
 }

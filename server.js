@@ -15,6 +15,7 @@ const {
 } = require('./stores/internalStonkData')
 const { protectedRoute } = require('./middleware/protectedRoute')
 const { getStonkPrices, getStonkData } = require('./stores/externalStonkData')
+const showdown = require('showdown')
 
 const app = express()
 
@@ -68,12 +69,13 @@ app.get(
 app.get(
   '/stonks/:ticker',
   asyncHandler(async (req, res) => {
-    // params is the ticker
     const ticker = req.params.ticker
     const username = req.user.username
     const stonkData = await getStonkData({ ticker })
     const stonk = await getStonk({ ticker, username })
-    res.render('stonk', { req, stonkData, stonk })
+    const converter = new showdown.Converter()
+    const dd = converter.makeHtml(stonk.dd)
+    res.render('stonk', { req, stonkData, stonk, dd })
   }),
 )
 app.get(
