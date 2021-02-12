@@ -173,12 +173,8 @@ app.post(
   protectedRoute,
   asyncHandler(async (req, res) => {
     const username = req.user.username
-    const dd = req.body.dd
     const ticker = req.params.ticker
-    console.log(`req.params`, req.params)
-    // do i need this here?
-    // should i be passing the return value of getStonk into upsert?
-    // const stonk = await getStonk({ username, ticker })
+    const dd = req.body.dd
     await upsertDD({ username, ticker, dd })
     res.redirect(`/stonks/${ticker}`)
   }),

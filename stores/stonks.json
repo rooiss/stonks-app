@@ -1,1 +1,9 @@
-[{"username":"rooiss","ticker":"GME"},{"username":"rooiss","ticker":"BB"},{"username":"rooiss","ticker":"AMC"},{"username":"rooiss","ticker":"NAKD"},{"username":"rooiss","ticker":"VALE"},{"username":"rooiss","ticker":"AAPL"},{"username":"rooiss","ticker":"SNDL","dd":""}]
+[
+  { "username": "rooiss", "ticker": "GME" },
+  { "username": "rooiss", "ticker": "BB" },
+  { "username": "rooiss", "ticker": "AMC", "dd": "### i like the stonk" },
+  { "username": "rooiss", "ticker": "NAKD" },
+  { "username": "rooiss", "ticker": "VALE" },
+  { "username": "rooiss", "ticker": "AAPL" },
+  { "username": "rooiss", "ticker": "SNDL", "dd": "" }
+]
