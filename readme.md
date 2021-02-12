@@ -48,22 +48,22 @@
 
 ### frontend requirements:
 
-- [ ] new ejs template for single stonk metadata
+- [x] new ejs template for single stonk metadata
   - [x] show various metadata from api
-  - [ ] render DD for this stonk and user, using markdown to HTML converter (DD is stored as markdown)
-  - [ ] add link under rendered DD to edit the DD
-- [ ] new ejs template for updating DD
-  - [ ] form for updating DD (method = POST, action is to the new POST endpoint for upserting DD)
-  - [ ] textarea containing existing markdown DD (if there is any)
-  - [ ] submit button
+  - [x] render DD for this stonk and user, using markdown to HTML converter (DD is stored as markdown)
+  - [x] add link under rendered DD to edit the DD
+- [x] new ejs template for updating DD
+  - [x] form for updating DD (method = POST, action is to the new POST endpoint for upserting DD)
+  - [x] textarea containing existing markdown DD (if there is any)
+  - [x] submit button
 
 ### backend requirements:
 
-- [ ] GET end point for rendering single stonk page
-  - [ ] should have param in url for ticker
-- [ ] add methods to the stonks store
-  - [ ] getStonkData
-  - [ ] upsertDD (insert or update)
-  - [ ] getDD (takes two arg, username and ticker)
-- [ ] POST end point for upserting DD for a given ticker
-  - [ ] upon success redirect to metadata stonk page with param
+- [x] GET end point for rendering single stonk page
+  - [x] should have param in url for ticker
+- [x] add methods to the stonks store
+  - [x] getStonkData
+  - [x] upsertDD (insert or update)
+  - [x] getDD (takes two arg, username and ticker)
+- [x] POST end point for upserting DD for a given ticker
+  - [x] upon success redirect to metadata stonk page with param
