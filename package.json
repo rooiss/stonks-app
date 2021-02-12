@@ -6,16 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=development nodemon server.js",
     "test:watch": "jest --watch",
-    "test": "jest"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "**/*.{js,jsx}",
-      "!**/node_modules/**",
-      "!**/vendor/**"
-    ],
-    "coverageDirectory": "coverage",
-    "collectCoverage": true
+    "test": "jest --config jest.coverage.js"
   },
   "keywords": [],
   "author": "",
