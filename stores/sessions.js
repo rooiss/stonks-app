@@ -1,58 +1,29 @@
 const path = require('path')
-const { readFile, writeFile } = require('fs')
+const { readFile, writeFile } = require('fs').promises
 
 const sessionFilePath = path.resolve(__dirname, './sessions.json')
 
-const createSession = ({ username }) => {
-  return new Promise((resolve, reject) => {
-    readFile(sessionFilePath, 'utf8', (err, data) => {
-      if (err) {
-        return reject(err)
-      }
-      // parse
-      let sessions
-      try {
-        sessions = JSON.parse(data)
-      } catch (e) {
-        return reject(e)
-      }
-      // create session
-      const sessionId = 'session-' + Math.random()
-      sessions[sessionId] = {
-        username: username,
-        loginTime: Date.now(),
-      }
-      // serialize updated sessions object
-      const newSessionsData = JSON.stringify(sessions)
-      writeFile(sessionFilePath, newSessionsData, 'utf8', (err) => {
-        if (err) {
-          return reject(err)
-        }
-        return resolve(sessionId)
-      })
-    })
-  })
+const createSession = async ({ username }) => {
+  const sessions = await readFile(sessionFilePath, 'utf8').then(JSON.parse)
+  // create session
+  const sessionId = 'session-' + Math.random()
+  sessions[sessionId] = {
+    username: username,
+    loginTime: Date.now(),
+  }
+  // serialize updated sessions object
+  const newSessionsData = JSON.stringify(sessions)
+  await writeFile(sessionFilePath, newSessionsData, 'utf8')
+  return sessionId
 }
 
-const getSession = (sessionId) => {
-  return new Promise((resolve, reject) => {
-    readFile(sessionFilePath, 'utf8', (err, data) => {
-      if (err) {
-        return reject(err)
-      }
-      let sessions
-      try {
-        sessions = JSON.parse(data)
-      } catch (e) {
-        return reject(e)
-      }
-      // get session
-      if (sessions[sessionId]) {
-        return resolve(sessions[sessionId])
-      }
-      return resolve(null)
-    })
-  })
+const getSession = async (sessionId) => {
+  const sessions = await readFile(sessionFilePath, 'utf8').then(JSON.parse)
+  // get session
+  if (sessions[sessionId]) {
+    return sessions[sessionId]
+  }
+  return null
 }
 
 exports.getSession = getSession

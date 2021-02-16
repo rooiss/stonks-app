@@ -1,0 +1,54 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  margin: 0 auto;
+  line-height: 20px;
+  background-color: black;
+}
+a {
+  color: gold;
+  text-decoration: none;
+}
+a:hover {
+  color: rgb(245, 233, 164);
+}
+.container {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.main-nav {
+  display: flex;
+  width: 100%;
+}
+.main-brand {
+  background: url(https://upload.wikimedia.org/wikipedia/en/f/f0/WallStreetBets.png)
+    no-repeat;
+  background-size: contain;
+  width: 300px;
+  text-indent: -10000px;
+}
+.main-nav ul {
+  display: flex;
+  flex-direction: row;
+}
+.main-nav ul a {
+  padding: 0.5em 1em;
+}
+li {
+  list-style: none;
+}
+h1 {
+  margin: 0;
+  padding: 20px 0;
+  color: gold;
+  text-shadow: 3px 3px 2px rgb(105, 104, 104);
+}
+#content {
+  display: flex;
+  flex-direction: column;
+}
+#dd {
+  width: 100%;
+}

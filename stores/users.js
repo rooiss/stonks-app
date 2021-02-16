@@ -1,6 +1,6 @@
 const path = require('path')
 const { pick } = require('lodash')
-const { readFile, writeFile } = require('fs')
+const { readFile, writeFile } = require('fs').promises
 
 const filePath = path.resolve(__dirname, './users.json')
 
@@ -10,63 +10,30 @@ const toPublicUser = (userObject) => {
   return parsedObj
 }
 
-const getUser = (username) => {
-  // checking to see if username is in the users object
-  return new Promise((resolve, reject) => {
-    // read file
-    readFile(filePath, 'utf8', (err, data) => {
-      if (err) {
-        return reject(err)
-      }
-      // parse
-      let users
-      try {
-        users = JSON.parse(data)
-      } catch (e) {
-        return reject(e)
-      }
-      // getUser
-      if (users[username]) {
-        return resolve(toPublicUser(users[username]))
-      }
-      return resolve(null)
-    })
-  })
+const getUser = async (username) => {
+  const users = await readFile(filePath, 'utf8').then(JSON.parse)
+  if (users[username]) {
+    return toPublicUser(users[username])
+  }
+  return null
 }
-const createUser = ({ username, password }) => {
-  return new Promise((resolve, reject) => {
-    readFile(filePath, 'utf8', (err, data) => {
-      if (err) {
-        return reject(err)
-      }
-      // parse
-      let users
-      try {
-        users = JSON.parse(data)
-      } catch (e) {
-        return reject(e)
-      }
-      // creatingUser
-      if (!users[username]) {
-        users[username] = {
-          username: username,
-          password: password,
-          signUpTime: new Date(),
-        }
-        // serialize updated users object
-        const newUserData = JSON.stringify(users)
-        // write to the file
-        writeFile(filePath, newUserData, 'utf8', (err) => {
-          if (err) {
-            return reject(err)
-          }
-          return resolve(toPublicUser(users[username]))
-        })
-      } else {
-        return reject(new Error('username already exists'))
-      }
-    })
-  })
+const createUser = async ({ username, password }) => {
+  const users = await readFile(filePath, 'utf8').then(JSON.parse)
+  // creatingUser
+  if (!users[username]) {
+    users[username] = {
+      username: username,
+      password: password,
+      signUpTime: new Date(),
+    }
+    // serialize updated users object
+    const newUserData = JSON.stringify(users)
+    // write to the file
+    await writeFile(filePath, newUserData, 'utf8')
+    return toPublicUser(users[username])
+  } else {
+    throw new Error('username already exists')
+  }
 }
 
 exports.getUser = getUser
