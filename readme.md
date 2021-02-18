@@ -67,3 +67,13 @@
   - [x] getDD (takes two arg, username and ticker)
 - [x] POST end point for upserting DD for a given ticker
   - [x] upon success redirect to metadata stonk page with param
+
+## Game Plan
+
+- [ ] finish notifications
+- [ ] switch to ts
+- [ ] switch to mongodb
+- [ ] reddis for sessions
+- [ ] deploy to digital ocean (cd)
+- [ ] ci on github
+- [ ] styling
