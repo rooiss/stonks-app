@@ -1,5 +1,6 @@
 require('dotenv').config()
 
+const path = require('path')
 const express = require('express')
 const { asyncHandler } = require('./utils/asyncHandler')
 const { cookieParser } = require('./middleware/cookieParser')
@@ -17,6 +18,7 @@ const {
 } = require('./stores/internalStonkData')
 const { protectedRoute } = require('./middleware/protectedRoute')
 const { getStonkPrices, getStonkData } = require('./stores/externalStonkData')
+
 const showdown = require('showdown')
 
 const app = express()
@@ -29,6 +31,7 @@ app.use(sessionMiddleware)
 app.use(userMiddleware)
 
 app.set('view engine', 'ejs')
+app.set('views', path.join(__dirname, '/views'))
 
 // Get routes
 app.get('/', (req, res) => {
@@ -207,7 +210,7 @@ app.post(
   }),
 )
 
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, '/public')))
 
 app.listen(4500, () => {
   console.log('server listening on port 4500')

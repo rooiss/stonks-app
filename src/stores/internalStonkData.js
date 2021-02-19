@@ -12,34 +12,9 @@ const getStonksByUsername = async ({ username }) => {
 const saveStonk = async ({ username, ticker, dd }) => {
   const stonks = await readFile(filePath, 'utf8').then(JSON.parse)
   stonks.push({ username, ticker, dd })
-  const savedStonk = JSON.stringify(stonks)
-  await writeFile(filePath, savedStonk, 'utf8')
+  const savedStonks = JSON.stringify(stonks)
+  await writeFile(filePath, savedStonks, 'utf8')
   return
-
-  // return new Promise((resolve, reject) => {
-  //   readFile(filePath, 'utf8', (err, data) => {
-  //     if (err) {
-  //       return reject(err)
-  //     }
-  //     let stonks
-  //     try {
-  //       stonks = JSON.parse(data)
-  //     } catch (e) {
-  //       return reject(e)
-  //     }
-  //     // add dd here but make it null or empty string
-  //     stonks.push({ username, ticker, dd })
-  //     const savedStonk = JSON.stringify(stonks)
-  //     console.log(`savedStonk`, savedStonk)
-  //     writeFile(filePath, savedStonk, 'utf8', (err) => {
-  //       if (err) {
-  //         return reject(err)
-  //       }
-  //       // not passing anything into resolve
-  //       return resolve()
-  //     })
-  //   })
-  // })
 }
 
 const getStonk = async ({ ticker, username }) => {
