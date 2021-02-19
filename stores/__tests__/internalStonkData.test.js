@@ -4,6 +4,7 @@ const {
   saveStonk,
   getStonk,
   upsertDD,
+  addNotification,
 } = require('../internalStonkData')
 jest.mock('fs')
 
@@ -19,7 +20,6 @@ describe('the internal stonks module', () => {
     await saveStonk({ username: notRando, ticker: 'BB' })
     await saveStonk({ username: randoname, ticker: 'BB' })
     const res = await getStonksByUsername({ username: notRando })
-
     expect(res).toEqual([
       { username: notRando, ticker: 'GME' },
       { username: notRando, ticker: 'AMC' },
@@ -48,6 +48,25 @@ describe('the internal stonks module', () => {
       username: 'notRando',
       ticker: 'AMC',
       dd: 'boom roasted',
+    })
+  })
+  it.only('adds a notification array to the stonk', async () => {
+    await saveStonk({ username: 'notRando', ticker: 'AMC' })
+    await addNotification({
+      username: 'notRando',
+      ticker: 'AMC',
+      notification: {},
+    })
+    const autist = await getStonk({ username: 'notRando', ticker: 'AMC' })
+    console.log(`autist`, autist)
+    expect(autist).toEqual({
+      username: 'notRando',
+      ticker: 'AMC',
+      notification: {
+        conditionType: 'gte',
+        price: 213,
+        notificationType: 'txt',
+      },
     })
   })
 })

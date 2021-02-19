@@ -12,6 +12,8 @@ const {
   getStonksByUsername,
   upsertDD,
   getStonk,
+  addNotification,
+  getNotificationsByUsername,
 } = require('./stores/internalStonkData')
 const { protectedRoute } = require('./middleware/protectedRoute')
 const { getStonkPrices, getStonkData } = require('./stores/externalStonkData')
@@ -64,6 +66,15 @@ app.get(
     res.json({
       stonks: prices,
     })
+  }),
+)
+app.get(
+  '/api/notifications',
+  protectedRoute,
+  asyncHandler(async (req, res) => {
+    const username = req.user.username
+    const notifications = await getNotificationsByUsername({ username })
+    res.json({ notifications })
   }),
 )
 app.get(
@@ -176,6 +187,22 @@ app.post(
     const ticker = req.params.ticker
     const dd = req.body.dd
     await upsertDD({ username, ticker, dd })
+    res.redirect(`/stonks/${ticker}`)
+  }),
+)
+
+app.post(
+  '/addNotification/:ticker',
+  protectedRoute,
+  asyncHandler(async (req, res) => {
+    // TODO: validation
+    const username = req.user.username
+    const ticker = req.params.ticker
+    const notification = req.body
+    // const conditionType = notification.conditionType
+    // const targetPrice = notification.targetPrice
+    // const notificationType = notification.notificationType
+    await addNotification({ username, ticker, notification })
     res.redirect(`/stonks/${ticker}`)
   }),
 )

@@ -5,28 +5,48 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/css/common.css">
 </head>
 <body>
   <div class="container">
+    <div class="main-nav">
       <%- include('nav', {}); %>
+    </div>
     <div id="content">
       <h1><%= req.params.ticker %></h1>
-      <ul>
       <% Object.keys(stonkData.data).forEach(function(key) { %>
-      <li><%= key %></li>
-      <ul>
-        <li><%= stonkData.data[key] %></li>
-      </ul>
-    <% }); %>
+        <div class="info">
+          <h4><%= key %></h4>
+          <p><%= stonkData.data[key] %></p>
+        </div>
+      <% }); %>
     </div>
-      <div id="dd">
-        <%- dd %>
-      </div>
-      <button><a href="/stonks/<%= req.params.ticker %>/upsert">edit DD</a></button>
-    </ul>
+    <div id="dd">
+      <h2>DD</h2>
+      <p><%- dd %></p>
+    </div>
+    <button><a href="/stonks/<%= req.params.ticker %>/upsert">edit DD</a></button>
+    <h2>Notifications:</h2>
+    <div id="notifications">
+
+    </div>
+    <form action="/addNotification/<%= req.params.ticker %>" method="POST">
+      <label for="">Condition type</label>
+      <select name="conditionType">
+        <option value="lte" name='lte'><=</option>
+        <option value="gte" name='gte'>>=</option>
+      </select>
+      <label for="targetPrice">Target Price</label>
+      <input type="text" name="targetPrice">
+      <label for="">Notification Type</label>
+      <select name="notificationType">
+        <option value="txt" name='txt'>txt</option>
+        <option value="email" name='email'>email</option>
+      </select>
+      <input type="submit" value="add notification">
+    </form>
   </div>
 </body>
+<script src="/js/stonk-page.js"></script>
 </html>
