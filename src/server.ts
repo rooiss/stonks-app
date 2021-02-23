@@ -5,7 +5,7 @@ const express = require('express')
 const { asyncHandler } = require('./utils/asyncHandler')
 const { cookieParser } = require('./middleware/cookieParser')
 const { createSession, getSession } = require('./stores/sessions')
-const { createUser, getUser } = require('./stores/users')
+// const { createUser, getUser } = require('./stores/users')
 const { sessionMiddleware } = require('./middleware/sessionMiddleware')
 const { userMiddleware } = require('./middleware/userMiddleware')
 const {
@@ -18,9 +18,11 @@ const {
 } = require('./stores/internalStonkData')
 const { protectedRoute } = require('./middleware/protectedRoute')
 const { getStonkPrices, getStonkData } = require('./stores/externalStonkData')
+import { getUser, createUser } from './stores/users'
+import { connectdb } from './connectdb'
 
 const showdown = require('showdown')
-
+connectdb()
 const app = express()
 
 app.use(express.urlencoded({ extended: true }))

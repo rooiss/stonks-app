@@ -70,10 +70,10 @@
 
 ## Game Plan
 
-- [ ] finish notifications
-- [ ] switch to ts
+- [ ] finish notifications (actually notifying, email / text)
+- [x] switch to ts (ongoing process)
 - [ ] switch to mongodb
-- [ ] reddis for sessions
-- [ ] deploy to digital ocean (cd)
-- [ ] ci on github
+- [ ] redis for sessions
+- [ ] deploy to digital ocean (cd, continuous deployment)
+- [ ] ci (continuous integration, tests automatically running) on github
 - [ ] styling
