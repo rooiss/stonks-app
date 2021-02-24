@@ -4,7 +4,7 @@ const path = require('path')
 const express = require('express')
 const { asyncHandler } = require('./utils/asyncHandler')
 const { cookieParser } = require('./middleware/cookieParser')
-const { createSession, getSession } = require('./stores/sessions')
+import { createSession } from './stores/sessions'
 const { sessionMiddleware } = require('./middleware/sessionMiddleware')
 const { userMiddleware } = require('./middleware/userMiddleware')
 import {
@@ -19,8 +19,13 @@ const { getStonkPrices, getStonkData } = require('./stores/externalStonkData')
 import { getUser, createUser } from './stores/users'
 import { connectdb } from './connectdb'
 
+// redis implementation
+import redis from 'redis'
+const client = redis.createClient()
+
 const showdown = require('showdown')
 connectdb()
+
 const app = express()
 
 app.use(express.urlencoded({ extended: true }))
@@ -202,9 +207,6 @@ app.post(
     const username = req.user.username
     const ticker = req.params.ticker
     const notification = req.body
-    // const conditionType = notification.conditionType
-    // const targetPrice = notification.targetPrice
-    // const notificationType = notification.notificationType
     await addNotification({ username, ticker, ...notification })
     res.redirect(`/stonks/${ticker}`)
   }),

@@ -1,6 +1,6 @@
 // check cookies for specific value my_app_session
 //
-const { getSession } = require('../stores/sessions')
+import { getSession } from '../stores/sessions'
 const { asyncHandler } = require('../utils/asyncHandler')
 
 const sessionMiddleware = asyncHandler(async (req, res, next) => {
