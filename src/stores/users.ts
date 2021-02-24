@@ -9,6 +9,7 @@ const toPublicUser = (userObject: Document<any>) => {
   return parsedObj
 }
 
+// findOne instead of find?
 export const getUser = async (username) => {
   const found = await User.find({ username: username }).exec()
   if (found.length) {
