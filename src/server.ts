@@ -19,10 +19,6 @@ const { getStonkPrices, getStonkData } = require('./stores/externalStonkData')
 import { getUser, createUser } from './stores/users'
 import { connectdb } from './connectdb'
 
-// redis implementation
-import redis from 'redis'
-const client = redis.createClient()
-
 const showdown = require('showdown')
 connectdb()
 
