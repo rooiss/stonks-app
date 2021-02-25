@@ -5,22 +5,22 @@ const express = require('express')
 const { asyncHandler } = require('./utils/asyncHandler')
 const { cookieParser } = require('./middleware/cookieParser')
 const { createSession, getSession } = require('./stores/sessions')
-const { createUser, getUser } = require('./stores/users')
 const { sessionMiddleware } = require('./middleware/sessionMiddleware')
 const { userMiddleware } = require('./middleware/userMiddleware')
-const {
-  saveStonk,
+import {
   getStonksByUsername,
-  upsertDD,
+  upsertStonk,
   getStonk,
   addNotification,
   getNotificationsByUsername,
-} = require('./stores/internalStonkData')
+} from './stores/internalStonkData'
 const { protectedRoute } = require('./middleware/protectedRoute')
 const { getStonkPrices, getStonkData } = require('./stores/externalStonkData')
+import { getUser, createUser } from './stores/users'
+import { connectdb } from './connectdb'
 
 const showdown = require('showdown')
-
+connectdb()
 const app = express()
 
 app.use(express.urlencoded({ extended: true }))
@@ -177,7 +177,7 @@ app.post(
       // have to have a return statement for the render if there is another render
       // conditional statements need return if you want control flow to end
     }
-    await saveStonk({ username, ticker, dd })
+    await upsertStonk({ username, ticker, dd })
     res.redirect('/stonks')
   }),
 )
@@ -189,7 +189,7 @@ app.post(
     const username = req.user.username
     const ticker = req.params.ticker
     const dd = req.body.dd
-    await upsertDD({ username, ticker, dd })
+    await upsertStonk({ username, ticker, dd })
     res.redirect(`/stonks/${ticker}`)
   }),
 )
@@ -205,7 +205,7 @@ app.post(
     // const conditionType = notification.conditionType
     // const targetPrice = notification.targetPrice
     // const notificationType = notification.notificationType
-    await addNotification({ username, ticker, notification })
+    await addNotification({ username, ticker, ...notification })
     res.redirect(`/stonks/${ticker}`)
   }),
 )

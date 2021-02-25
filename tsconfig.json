@@ -4,7 +4,8 @@
     "allowJs": true,
     "checkJs": true,
     "target": "ES5",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "baseUrl": "./src"
   },
   "include": ["./src"],
   "exclude": ["./coverage"]
