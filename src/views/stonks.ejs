@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
+<!-- 
+<div class="root">
   <%- include('nav', {}); %>
   <% if (stonks.length) { %>
     <h1>Your Saved Stonks</h1>
@@ -15,17 +9,47 @@
         <% }); %>
       </ul>
       <% } %>
-    <form action="/stonks" method="POST">
-      <h3>Your ticket to the moon</h3>
+      <form action="/stonks" method="POST">
+        <h3>Your ticket to the moon</h3>
         <% if (errors.length) { %>
           <% errors.forEach(function(error){ %>
-              <p><%= error %></p>
-              <% }); %>
-        <% } %>
-    <label for="">Stonk Ticker</label>
-    <input type="text" name="tickerSymbol">
-    <input type="submit">
-  </form>
-</body>
+            <p><%= error %></p>
+            <% }); %>
+            <% } %>
+            <label for="">Stonk Ticker</label>
+            <input type="text" name="tickerSymbol">
+            <input type="submit">
+          </form>
+</div>
 <script src="/js/stonks-page.js"></script>
-</html>
+<%- include('footer'); %> --> 
+
+<%- include('header', {stylesheets: ['/css/stonks.css']}); %>
+    <div class="root">
+      <%- include('nav'); %>
+      <div class="mainContent">
+        <form class="form" action="/stonks" method="POST">
+          <% if (errors.length) { %>
+            <% errors.forEach(function(error){ %>
+              <p class="tickerInputError"><%= error %></p>
+            <% }); %>
+          <% } %>
+          <label class="tickerInputLabel" for="">add ticker</label>
+          <input class="tickerInputBox" type="text" maxlength="5" name="tickerSymbol"/>
+          <button class="tickerInputSubmit" type="submit">
+            💎🙌🏻
+          </button>
+        </form>
+        <div class="stonk-card-container">
+          <% stonks.forEach(function(stonk){ %>
+            <a href="/stonks/<%= stonk.ticker %>" class="stonk-card">
+              <h2 class="ticker-symbol"><%= stonk.ticker %></h2>
+              <div id="ticker-<%= stonk.ticker %>" class="ticker-price"></div>
+            </a>
+          <% }); %>
+        </div>
+      </div>
+    </div>
+<script src="/js/stonks-page.js"></script>
+<%- include('footer'); %> 
+

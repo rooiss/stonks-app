@@ -10,15 +10,14 @@ const setAsync = promisify(client.set).bind(client)
 
 export const createSession = async ({ username }) => {
   const sessionId = 'session-' + Math.random()
-  await setAsync(sessionId, username)
+  await setAsync(sessionId, JSON.stringify({ username }))
   return sessionId
 }
 
 export const getSession = async (sessionId) => {
-  // get session
   const session = await getAsync(sessionId)
   if (session) {
-    return session
+    return JSON.parse(session)
   }
   return null
 }

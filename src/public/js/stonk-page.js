@@ -25,3 +25,17 @@ function getNotifications() {
 }
 
 getNotifications()
+
+const toggleInfoButton = document.querySelector('button.toggleInfo')
+const stonkInfoEl = document.querySelector('.stonkInfo')
+const EXPANDED_CLASS = 'stonkInfo_expanded'
+toggleInfoButton.addEventListener('click', () => {
+  const curClasses = Array.from(stonkInfoEl.classList)
+  let newClasses = curClasses
+  if (curClasses.includes(EXPANDED_CLASS)) {
+    newClasses.pop()
+  } else {
+    newClasses.push(EXPANDED_CLASS)
+  }
+  stonkInfoEl.className = newClasses.join(' ')
+})
