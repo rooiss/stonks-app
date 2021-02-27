@@ -1,52 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-
-  <link rel="stylesheet" href="/css/common.css">
-</head>
-<body>
-  <div class="container">
-    <div class="main-nav">
-      <%- include('nav', {}); %>
-    </div>
-    <div id="content">
-      <h1><%= req.params.ticker %></h1>
-      <% Object.keys(stonkData.data).forEach(function(key) { %>
-        <div class="info">
-          <h4><%= key %></h4>
-          <p><%= stonkData.data[key] %></p>
+<%- include('header',{stylesheets: ['/css/stonk.css']}); %>
+  <div class="root">
+    <%- include('nav', {}); %>
+    <div class="mainContent">
+      <div class="stonkInfoContainer">
+        <h1><%= req.params.ticker %></h1>
+        <div class="stonkInfo">
+          <p class="stonkDescription">
+            <%= stonkData.data.description %>
+          </p>
+          <button class="toggleInfo">toggle</button>
         </div>
-      <% }); %>
-    </div>
-    <div id="dd">
-      <h2>DD</h2>
-      <p><%- dd %></p>
-    </div>
-    <button><a href="/stonks/<%= req.params.ticker %>/upsert">edit DD</a></button>
-    <h2>Notifications:</h2>
-    <div id="notifications">
-
-    </div>
-    <form action="/addNotification/<%= req.params.ticker %>" method="POST">
-      <label for="">Condition type</label>
-      <select name="conditionType">
-        <option value="lte" name='lte'><=</option>
-        <option value="gte" name='gte'>>=</option>
-      </select>
-      <label for="targetPrice">Target Price</label>
-      <input type="text" name="targetPrice">
-      <label for="">Notification Type</label>
-      <select name="notificationType">
-        <option value="txt" name='txt'>txt</option>
-        <option value="email" name='email'>email</option>
-      </select>
-      <input type="submit" value="add notification">
-    </form>
+        <div id="ddContainer">
+          <h2>Due Dilligence</h2>
+          <p><%- dd %></p>
+          <button><a class="ddSubmitLink" href="/stonks/<%= req.params.ticker %>/upsert">edit DD</a></button>
+        </div>
+      </div>
+      <div class="notificationContainer">
+        <h2>Notifications</h2>
+        <div id="notifications"></div>
+          <form class="notificationForm" action="/addNotification/<%= req.params.ticker %>" method="POST">
+            <label for="">Condition type</label>
+            <select name="conditionType">
+              <option value="lte" name='lte'><=</option>
+              <option value="gte" name='gte'>>=</option>
+            </select>
+            <label for="targetPrice">Target Price</label>
+            <input type="text" name="targetPrice">
+            <label for="">Notification Type</label>
+            <select name="notificationType">
+              <option value="txt" name='txt'>txt</option>
+              <option value="email" name='email'>email</option>
+            </select>
+            <input type="submit" value="add notification">
+          </form>
+        </div>
+      </div>
   </div>
-</body>
 <script src="/js/stonk-page.js"></script>
-</html>
+<%- include('footer'); %>
