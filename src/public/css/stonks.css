@@ -1,0 +1,58 @@
+.mainContent {
+  margin: 20px 0;
+}
+.stonk-card-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+.stonk-card {
+  min-width: 250px;
+  margin: 5px 5px;
+  min-height: 150px;
+  background-color: rgb(36, 36, 36);
+  transition: background-color 0.5s;
+  display: block;
+  text-decoration: none;
+  color: white;
+}
+.stonk-card:hover {
+  background-color: rgb(85, 85, 85);
+}
+.ticker-symbol {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+.ticker-price {
+  display: flex;
+  justify-content: center;
+  margin: 5px 0;
+}
+.form {
+  display: flex;
+  align-items: stretch;
+}
+.tickerInputLabel {
+  display: flex;
+  align-items: center;
+  margin: 0 0 0 10px;
+}
+.tickerInputBox {
+  background-color: rgb(82, 82, 82);
+  border: none;
+  color: white;
+  padding: 0.5em;
+  /* margin: 0.1em; */
+  font-size: x-large;
+  font-family: 'Courier New', Courier, monospace;
+  width: 4em;
+  text-transform: uppercase;
+  margin: 0 0 0 10px;
+}
+.tickerInputSubmit {
+  font-size: x-large;
+  background-color: rgb(34, 34, 34);
+  border: none;
+}

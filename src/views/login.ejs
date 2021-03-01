@@ -1,23 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>Sign In</h1>
-  <% if (errors.length) { %>
-    <% errors.forEach(function(error){ %>
-      <p style="color: red;"><%= error %></p>
-    <% }); %>
-  <% } %>
-  <form action="/login" method="POST">
-    <label for="username">username</label>
-    <input type="text" name="username">
-    <label for="password">password</label>
-    <input type="password" name="password">
-    <input type="submit">
-  </form>
-</body>
-</html>
+<%- include('header',{stylesheets: ['/css/login.css']}); %>
+<div class="root">
+  <div class="loginFormContainer">
+    <body>
+      <h1>Sign In</h1>
+      <% if (errors.length) { %>
+        <% errors.forEach(function(error){ %>
+          <p style="color: red;"><%= error %></p>
+        <% }); %>
+      <% } %>
+        <form class="loginForm"action="/login" method="POST">
+          <label class="loginFormLabel"for="username">username</label>
+          <input class="loginFormInput"type="text" name="username">
+          <label class="loginFormLabel"for="password">password</label>
+          <input class="loginFormInput"type="password" name="password">
+          <input class="loginFormBtn"type="submit">
+        </form>
+  </div>
+<%- include('footer'); %>
+</div>

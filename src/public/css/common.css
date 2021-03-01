@@ -40,3 +40,8 @@ body {
   text-decoration: none;
   color: gold;
 }
+.disclaimer {
+  display: flex;
+  justify-content: center;
+  font-size: x-small;
+}

@@ -1,0 +1,33 @@
+.loginFormContainer {
+  display: flex;
+  flex-direction: column;
+  min-width: 800px;
+  align-items: center;
+}
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+.loginFormInput {
+  padding: 10px;
+  margin: 10px 0 0 0;
+  background-color: rgb(70, 70, 70);
+  border: none;
+  font-size: x-large;
+  color: whitesmoke;
+}
+.loginFormLabel {
+  margin: 15px 0 0 0;
+}
+.loginFormBtn {
+  margin: 20px 0 0 0;
+  border: none;
+  background-color: rgb(92, 92, 92);
+  font-size: x-large;
+  color: goldenrod;
+  transition: color 0.5s;
+}
+.loginFormBtn:hover {
+  cursor: pointer;
+  color: gold;
+}

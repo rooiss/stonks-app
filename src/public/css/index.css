@@ -1,0 +1,8 @@
+.indexLoginLinks {
+  text-decoration: none;
+  color: goldenrod;
+  transition: color 0.5s;
+}
+.indexLoginLinks:hover {
+  color: gold;
+}
