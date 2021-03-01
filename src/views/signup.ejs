@@ -1,25 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>Sign Up</h1>
-  <% if (errors.length) { %>
-    <% errors.forEach(function(error){ %>
-      <p style="color: red;"><%= error %></p>
-    <% }); %>
-  <% } %>
-  <form action="/signup" method="POST">
-    <label for="username">username</label>
-    <input type="text" name="username">
-    <label for="password">password</label>
-    <input type="password" name="password">
-    <label for="verifypassword">verify password</label>
-    <input type="password" name="verifypassword">
-    <input type="submit">
-  </form>
-</body>
-</html>
+<%- include('header',{stylesheets: ['/css/signup.css']}); %>
+<div class="root">
+  <div class="signupContainer">
+    <h1>Sign Up</h1>
+    <% if (errors.length) { %>
+      <% errors.forEach(function(error){ %>
+        <p style="color: red;"><%= error %></p>
+        <% }); %>
+        <% } %>
+        <form class="signupForm" action="/signup" method="POST">
+          <label class="signupFormLabel" for="username">username</label>
+          <input class="signupFormInput" type="text" name="username">
+          <label class="signupFormLabel" for="password">password</label>
+          <input class="signupFormInput" type="password" name="password">
+          <label class="signupFormLabel" for="verifypassword">verify password</label>
+          <input class="signupFormInput" type="password" name="verifypassword">
+          <input class="signupFormBtn" type="submit">
+        </form>
+    </div>
+<%- include('footer'); %>
+</div>

@@ -1,0 +1,67 @@
+.mainContent {
+  display: flex;
+  flex-direction: row;
+}
+.stonkInfoContainer {
+  margin: 0 20px 0 0;
+}
+.notificationContainer {
+  margin: 0 0 0 10px;
+  min-width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+.stonkInfo {
+  max-height: 100px;
+  overflow: hidden;
+  position: relative;
+}
+.toggleInfo {
+  display: block;
+  border: none;
+  background: transparent;
+  color: goldenrod;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  box-shadow: inset 0 -55px 34px -5px rgb(24, 24, 24);
+  outline: none;
+}
+.stonkInfo.stonkInfo_expanded {
+  max-height: none;
+  padding-bottom: 40px;
+}
+.notificationForm {
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-end; */
+  /* align-content: flex-end; */
+  max-width: 200px;
+  margin: 10px 0 10px 0;
+  font-size: small;
+}
+.notificationFormInput {
+  background-color: rgb(78, 78, 78);
+  color: white;
+  border: none;
+}
+.notificationFormInputBtn {
+  background-color: rgb(78, 78, 78);
+  color: white;
+  border: none;
+  margin: 10px 0 0 0;
+}
+.ddSubmitBtn {
+  border: none;
+  background-color: rgb(65, 64, 64);
+  font-size: x-large;
+  padding: 10px;
+}
+.ddSubmitLink {
+  text-decoration: none;
+  color: goldenrod;
+}
+.ddSubmitLink:hover {
+  color: gold;
+}

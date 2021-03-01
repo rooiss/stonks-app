@@ -13,7 +13,7 @@
         <div id="ddContainer">
           <h2>Due Dilligence</h2>
           <p><%- dd %></p>
-          <button><a class="ddSubmitLink" href="/stonks/<%= req.params.ticker %>/upsert">edit DD</a></button>
+          <button class="ddSubmitBtn"><a class="ddSubmitLink"href="/stonks/<%= req.params.ticker %>/upsert">edit DD</a></button>
         </div>
       </div>
       <div class="notificationContainer">
@@ -21,18 +21,18 @@
         <div id="notifications"></div>
           <form class="notificationForm" action="/addNotification/<%= req.params.ticker %>" method="POST">
             <label for="">Condition type</label>
-            <select name="conditionType">
+            <select name="conditionType" class="notificationFormInput">
               <option value="lte" name='lte'><=</option>
               <option value="gte" name='gte'>>=</option>
             </select>
             <label for="targetPrice">Target Price</label>
-            <input type="text" name="targetPrice">
+            <input type="text" name="targetPrice" class="notificationFormInput">
             <label for="">Notification Type</label>
-            <select name="notificationType">
+            <select name="notificationType" class="notificationFormInput">
               <option value="txt" name='txt'>txt</option>
               <option value="email" name='email'>email</option>
             </select>
-            <input type="submit" value="add notification">
+            <input type="submit" value="add notification" class="notificationFormInputBtn">
           </form>
         </div>
       </div>

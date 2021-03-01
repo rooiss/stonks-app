@@ -1,0 +1,33 @@
+.signupForm {
+  display: flex;
+  flex-direction: column;
+}
+.signupContainer {
+  display: flex;
+  flex-direction: column;
+  min-width: 800px;
+  align-items: center;
+}
+.signupFormInput {
+  padding: 10px;
+  margin: 10px 0 0 0;
+  background-color: rgb(70, 70, 70);
+  border: none;
+  font-size: x-large;
+  color: whitesmoke;
+}
+.signupFormLabel {
+  margin: 15px 0 0 0;
+}
+.signupFormBtn {
+  margin: 20px 0 0 0;
+  border: none;
+  background-color: rgb(92, 92, 92);
+  font-size: x-large;
+  color: goldenrod;
+  transition: color 0.5s;
+}
+.signupFormBtn:hover {
+  cursor: pointer;
+  color: gold;
+}
