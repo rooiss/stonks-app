@@ -6,6 +6,7 @@ const { pick } = require('lodash')
 const toPublicUser = (userObject: Document<any>) => {
   const parsedObj = pick(userObject, ['username', 'signUpTime', 'password'])
   parsedObj.signUpTime = new Date(parsedObj.signUpTime)
+
   return parsedObj
 }
 

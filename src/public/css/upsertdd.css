@@ -1,0 +1,25 @@
+.upsertForm {
+  display: flex;
+  flex-direction: column;
+  /* max-width: 800px; */
+  /* justify-content: center; */
+  align-items: center;
+}
+.upsertTxtArea {
+  background-color: rgb(61, 61, 61);
+  color: white;
+  font-size: large;
+  margin: 0 0 15px 0;
+}
+
+.upsertSubmit {
+  border: none;
+  background-color: rgb(65, 64, 64);
+  font-size: x-large;
+  color: goldenrod;
+  padding: 10px;
+}
+.upsertSubmit:hover {
+  cursor: pointer;
+  color: gold;
+}
