@@ -166,6 +166,7 @@ app.post(
   protectedRoute,
   asyncHandler(async (req, res) => {
     const ticker = req.body.tickerSymbol
+    console.log(`ticker`, ticker)
     const username = req.user.username
     const dd = ''
     const errors = []
