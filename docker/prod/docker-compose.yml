@@ -20,7 +20,7 @@ services:
       - skynet
   app:
     # need to pull image from dockerhub
-    # image:
+    image: rooiss/stonks:latest
     networks:
       - stonknet
     ports:
