@@ -2,6 +2,11 @@ import * as request from 'request'
 
 export const getStonkPrices = async ({ tickers }) => {
   const tickerPromises = tickers.map(({ ticker }) => {
+    console.log(
+      `=========== Tiingo token ? ${
+        process.env.TIINGO_TOKEN ? 'yes' : 'no'
+      } =============`,
+    )
     const requestOptions = {
       url: `https://api.tiingo.com/tiingo/daily/${ticker}/prices`,
       headers: {
@@ -12,7 +17,19 @@ export const getStonkPrices = async ({ tickers }) => {
     return new Promise((resolve, reject) => {
       request(requestOptions, function (error, response, body) {
         const data = JSON.parse(body)
-        return resolve({ ticker, price: data[0].close })
+        if (data.length && data[0].close) {
+          return resolve({ ticker, price: data[0].close })
+        }
+        console.error(
+          'externalStonkData: data from Tiingo was not in expected format',
+          data,
+          response.statusCode,
+        )
+        reject(
+          new Error(
+            'externalStonkData: data from Tiingo was not in expected format',
+          ),
+        )
       })
     })
   })

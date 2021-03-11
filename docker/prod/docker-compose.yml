@@ -22,6 +22,7 @@ services:
     # need to pull image from dockerhub
     container_name: app
     image: rooiss/stonks:latest
+    env_file: ../../.env
     networks:
       - skynet
     ports:
