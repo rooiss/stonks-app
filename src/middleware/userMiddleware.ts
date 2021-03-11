@@ -1,7 +1,7 @@
 const { getUser } = require('../stores/users')
 const { asyncHandler } = require('../utils/asyncHandler')
 
-const userMiddleware = asyncHandler(async (req, res, next) => {
+export const userMiddleware = asyncHandler(async (req, res, next) => {
   if (req.session) {
     const user = await getUser(req.session.username)
     if (user) {
@@ -10,5 +10,3 @@ const userMiddleware = asyncHandler(async (req, res, next) => {
   }
   next()
 })
-
-exports.userMiddleware = userMiddleware
