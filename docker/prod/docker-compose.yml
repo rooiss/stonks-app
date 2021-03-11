@@ -26,10 +26,5 @@ services:
     ports:
       - '4500:4500'
 
-volumes:
-  # This is for the docker-sync container that gets started
-  stonks_app-sync:
-    external: true
-
 networks:
   skynet:
