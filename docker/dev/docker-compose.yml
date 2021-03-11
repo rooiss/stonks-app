@@ -1,0 +1,46 @@
+version: '3.1'
+
+services:
+  db:
+    container_name: mongodb
+    image: mongo:latest
+    restart: always
+    volumes:
+      - ./.dbData:/data/db
+    networks:
+      - skynet
+  redis:
+    container_name: redis
+    image: redis:alpine
+    restart: always
+    volumes:
+      - ./.sessionsData:/data
+    networks:
+      - skynet
+  app:
+    image: stonks_app:local
+    container_name: stonks_app
+    working_dir: /root/app
+    tty: true
+    stdin_open: true
+    build:
+      context: $PWD
+      dockerfile: $PWD/docker/dev/Dockerfile
+    volumes:
+      - stonks_app-sync:/root/app:nocopy
+      # dirs to not sync over
+      - /root/app/node_modules/
+      - /root/app/coverage/
+      - /root/app/build/
+    networks:
+      - skynet
+    ports:
+      - '4500:4500'
+      - '9229:9229'
+volumes:
+  # This is for the docker-sync container that gets started
+  stonks_app-sync:
+    external: true
+
+networks:
+  skynet:

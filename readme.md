@@ -21,7 +21,6 @@
   - [x] each empty element should have an id using the ticker
 - [x] on page load make an ajax request to get the prices for all tickers
   - [x] fill in the empty elements with appropriate prices
-- [ ] if the market is open make another ajax request every 3 seconds
 
 ### backend requirements:
 
@@ -72,8 +71,8 @@
 
 - [ ] finish notifications (actually notifying, email / text)
 - [x] switch to ts (ongoing process)
-- [ ] switch to mongodb
-- [ ] redis for sessions
+- [x] switch to mongodb
+- [x] redis for sessions
 - [ ] deploy to digital ocean (cd, continuous deployment)
 - [ ] ci (continuous integration, tests automatically running) on github
 - [ ] styling

@@ -1,4 +1,7 @@
 node_modules
 .env
 coverage
+.sessionsData
 .dbData
+.vscode
+.docker-sync
