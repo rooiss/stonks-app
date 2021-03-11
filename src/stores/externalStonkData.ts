@@ -1,6 +1,6 @@
-const request = require('request')
+import request from 'request'
 
-const getStonkPrices = async ({ tickers }) => {
+export const getStonkPrices = async ({ tickers }) => {
   const tickerPromises = tickers.map(({ ticker }) => {
     const requestOptions = {
       url: `https://api.tiingo.com/tiingo/daily/${ticker}/prices`,
@@ -19,7 +19,7 @@ const getStonkPrices = async ({ tickers }) => {
   return await Promise.all(tickerPromises)
 }
 
-const getStonkData = async ({ ticker }) => {
+export const getStonkData = async ({ ticker }) => {
   const requestOptions = {
     url: `https://api.tiingo.com/tiingo/daily/${ticker}`,
     headers: {
@@ -34,6 +34,3 @@ const getStonkData = async ({ ticker }) => {
     })
   })
 }
-
-exports.getStonkPrices = getStonkPrices
-exports.getStonkData = getStonkData

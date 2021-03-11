@@ -1,4 +1,4 @@
-const cookieParser = (req, res, next) => {
+export const cookieParser = (req, res, next) => {
   let cookies = {}
   const rawCookiesHeader = req.get('cookie')
   if (rawCookiesHeader) {
@@ -22,9 +22,3 @@ const cookieParser = (req, res, next) => {
   req.cookies = cookies
   next()
 }
-exports.cookieParser = cookieParser
-
-// what does cookieparser do
-// first looks at req.header.cookies if that isnt set then it creates the object cookies
-// if it does exist then we need to take the string from req.header.cookies and parse it
-//

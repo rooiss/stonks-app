@@ -1,1 +1,0 @@
-[{"ticker":"SNDL","username":"poo","conditionType":"lte","targetPrice":"21344","notificationType":"txt"},{"ticker":"SNDL","username":"poo","conditionType":"gte","targetPrice":"420.69","notificationType":"email"}]
