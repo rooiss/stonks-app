@@ -1,4 +1,4 @@
-import request from 'request'
+import * as request from 'request'
 
 export const getStonkPrices = async ({ tickers }) => {
   const tickerPromises = tickers.map(({ ticker }) => {
