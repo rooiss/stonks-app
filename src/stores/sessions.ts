@@ -1,6 +1,6 @@
 // redis implementation
 import * as redis from 'redis'
-const client = redis.createClient()
+const client = redis.createClient({ host: 'redis' })
 client.on('connect', function () {
   console.log('connected to redis!!!!!!!!!!!!!!')
 })

@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose'
 
 export const connectdb = () => {
-  mongoose.connect('mongodb://localhost:27017/Stonks', {
+  mongoose.connect('mongodb://mongodb:27017/Stonks', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,

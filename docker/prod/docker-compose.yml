@@ -1,0 +1,36 @@
+version: '3.1'
+services:
+  redis:
+    image: redis:alpine
+    hostname: redis
+    volumes:
+      - ./.dbData:/data/db
+    environment:
+      - REDIS_REPLICATION_MODE=master
+    networks:
+      - skynet
+  db:
+    container_name: moonStore
+    image: mongo:latest
+    restart: always
+    volumes:
+      - ./.dbData:/data/db
+    networks:
+      - skynet
+  app:
+    image: stonks_app:dev
+    build:
+      context: .
+      dockerfile: $PWD/docker/prod/Dockerfile
+    networks:
+      - stonknet
+    ports:
+      - '4500:4500'
+
+volumes:
+  # This is for the docker-sync container that gets started
+  stonks_app-sync:
+    external: true
+
+networks:
+  skynet:
