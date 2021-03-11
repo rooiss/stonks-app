@@ -20,6 +20,7 @@ services:
       - skynet
   app:
     # need to pull image from dockerhub
+    container_name: app
     image: rooiss/stonks:latest
     networks:
       - skynet
