@@ -22,7 +22,7 @@ services:
     # need to pull image from dockerhub
     image: rooiss/stonks:latest
     networks:
-      - stonknet
+      - skynet
     ports:
       - '4500:4500'
 
