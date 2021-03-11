@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
+    "outDir": "./build",
     "allowJs": true,
     "checkJs": true,
     "target": "ES5",
@@ -8,5 +8,5 @@
     "baseUrl": "./src"
   },
   "include": ["./src"],
-  "exclude": ["./coverage"]
+  "exclude": ["./coverage", "./src/public"]
 }

@@ -5,9 +5,14 @@
   "main": "server.js",
   "scripts": {
     "start": "NODE_ENV=development ts-node-dev src/server.ts",
+    "start:prod": "NODE_ENV=production node build/server.js",
     "test:watch": "jest --watch",
     "test": "jest --config jest.config.js",
-    "docker": "docker-compose up -d"
+    "docker": "docker-compose up -d",
+    "build:clean": "rm -rf ./build",
+    "build:compile": "tsc",
+    "build:copy": "cp -r ./src/views ./build/views && cp -r ./src/public ./build/public",
+    "build": "npm run build:clean && npm run build:compile && npm run build:copy"
   },
   "keywords": [],
   "author": "",

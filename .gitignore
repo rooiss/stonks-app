@@ -5,3 +5,4 @@ coverage
 .dbData
 .vscode
 .docker-sync
+build

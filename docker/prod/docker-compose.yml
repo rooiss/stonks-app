@@ -2,6 +2,7 @@ version: '3.1'
 services:
   redis:
     image: redis:alpine
+    container_name: redis
     hostname: redis
     volumes:
       - ./.dbData:/data/db
@@ -10,7 +11,7 @@ services:
     networks:
       - skynet
   db:
-    container_name: moonStore
+    container_name: mongodb
     image: mongo:latest
     restart: always
     volumes:
@@ -18,10 +19,8 @@ services:
     networks:
       - skynet
   app:
-    image: stonks_app:dev
-    build:
-      context: .
-      dockerfile: $PWD/docker/prod/Dockerfile
+    # need to pull image from dockerhub
+    # image:
     networks:
       - stonknet
     ports:

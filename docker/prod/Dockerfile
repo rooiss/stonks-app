@@ -9,17 +9,18 @@ COPY . .
 # Install the server's build dependencies
 RUN npm install
 
+# do later 
 # Change to the client directory
-WORKDIR /app/client
+# WORKDIR /app/client
 
 # Install the client's build dependencies
-RUN npm install
+# RUN npm install
 
 # Build the client
-RUN npm run build
+# RUN npm run build
 
 # Move back to server
-WORKDIR /app
+# WORKDIR /app
  
 # Run the server build
 RUN npm run build
@@ -40,8 +41,12 @@ RUN npm ci --only=production
 # Copy over the built server
 COPY --from=build /app/build ./build
 
+# do later
 # Copy over the built client
-COPY --from=build /app/client/build /app/client/build
+# COPY --from=build /app/client/build /app/client/build
+
+# Expose the port
+EXPOSE 4500
 
 # Command to be run in production
-CMD ["npm", "run", "start:prod"]
+ENTRYPOINT ["npm", "run", "start:prod"]
