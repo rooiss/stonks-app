@@ -1,3 +1,4 @@
+import { createHash } from 'crypto'
 import { Document } from 'mongoose'
 import { User } from '../models/user.model'
 
@@ -22,7 +23,7 @@ export const getUser = async (username) => {
 export const createUser = async ({ username, password }) => {
   const user = new User({
     username: username,
-    password: password,
+    password: createHash('sha256').update(password, 'utf8').digest('base64'),
     signUpTime: new Date(),
   })
   return user.save().then(toPublicUser)

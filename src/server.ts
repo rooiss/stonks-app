@@ -18,6 +18,7 @@ const { protectedRoute } = require('./middleware/protectedRoute')
 const { getStonkPrices, getStonkData } = require('./stores/externalStonkData')
 import { getUser, createUser } from './stores/users'
 import { connectdb } from './connectdb'
+import { createHash } from 'crypto'
 
 const showdown = require('showdown')
 connectdb()
@@ -109,20 +110,19 @@ app.post(
   asyncHandler(async (req, res, next) => {
     const errors = []
     const loginUsername = req.body.username
+    const hashedPw = createHash('sha256')
+      .update(req.body.password, 'utf8')
+      .digest('base64')
     const userObj = await getUser(loginUsername)
     // validatation
     if (userObj === null) {
       errors.push('user doesnt exist')
-    }
-    if (userObj !== null && userObj.password !== req.body.password) {
+    } else if (userObj.password !== hashedPw) {
       errors.push('password is wrong')
     }
     if (errors.length) {
       res.render('login', { errors })
-    } else if (
-      userObj.username === loginUsername &&
-      userObj.password === req.body.password
-    ) {
+    } else {
       const sessionId = await createSession({ username: loginUsername })
       res.set('Set-Cookie', 'my_app_session=' + sessionId)
       res.redirect('/')
