@@ -125,7 +125,7 @@ app.post(
     } else {
       const sessionId = await createSession({ username: loginUsername })
       res.set('Set-Cookie', 'my_app_session=' + sessionId)
-      res.redirect('/')
+      res.redirect('/stonks')
     }
   }),
 )
@@ -157,7 +157,7 @@ app.post(
     })
     const sessionId = await createSession({ username: newUser.username })
     res.set('Set-Cookie', 'my_app_session=' + sessionId)
-    res.redirect('/')
+    res.redirect('/stonks')
   }),
 )
 

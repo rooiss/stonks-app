@@ -1,10 +1,7 @@
 <%- include('header', {stylesheets:['/css/index.css']}); %>
 <div class="root">
 <%- include('nav', {}); %>
-    <h1>A learning App, for learning people, who learn things</h1>
-    <% if (req.session) { %>
-      <p style="color: red;">You FINALLY LOGGED IN!! <%= req.session.username %></p>
-      <p><a class="indexLoginLinks"href="/logout">Log Out</a></p>
+    <h1>A stock app to learn.</h1>
     <% } %>
     <% if (!req.session) { %>
       <p><a class="indexLoginLinks" href="/login">Login here, diamond hands</a></p>
