@@ -2,11 +2,11 @@
 
 ## Tech Debt
 
-- [ ] convert project to typescript
+- [x] convert project to typescript
 - [ ] move routes to separate route files, under `/routes/*`
-- [ ] move json read logic into utility function(s) for stores
-- [ ] prettier config
-- [ ] continuous integration
+- [x] move json read logic into utility function(s) for stores
+- [x] prettier config
+- [x] continuous integration
 
 ## stonks page
 
@@ -73,6 +73,6 @@
 - [x] switch to ts (ongoing process)
 - [x] switch to mongodb
 - [x] redis for sessions
-- [ ] deploy to digital ocean (cd, continuous deployment)
-- [ ] ci (continuous integration, tests automatically running) on github
+- [x] deploy to digital ocean (cd, continuous deployment)
+- [x] ci (continuous integration, tests automatically running) on github
 - [ ] styling
