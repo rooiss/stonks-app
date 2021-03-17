@@ -2,6 +2,9 @@
 <div class="root">
 <%- include('nav', {}); %>
     <h1>A stock app to learn.</h1>
+    <% if (req.session) { %>
+      <!-- <p style="color: red;">You FINALLY LOGGED IN!! <%= req.session.username %></p> -->
+      <!-- <p><a class="indexLoginLinks"href="/logout">Log Out</a></p> -->
     <% } %>
     <% if (!req.session) { %>
       <p><a class="indexLoginLinks" href="/login">Login here, diamond hands</a></p>
