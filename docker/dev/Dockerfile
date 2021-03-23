@@ -14,4 +14,4 @@ EXPOSE 4500
 EXPOSE 9229
 
 # Command to first run inside the container when it starts up
-ENTRYPOINT ["/bin/bash", "--init-file", "/root/.profile"]
+# ENTRYPOINT ["/bin/bash", "--init-file", "/root/.profile"]

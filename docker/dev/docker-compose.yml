@@ -21,7 +21,7 @@ services:
     image: stonks_app:local
     container_name: stonks_app
     working_dir: /root/app
-    tty: true
+    # tty: true
     stdin_open: true
     # this tells docker compose not to pull from dockerhub, but instead build the image from the given docker file below
     build:
