@@ -1,6 +1,7 @@
 {
   "name": "stonks-app-client",
   "version": "0.1.0",
+  "proxy": "http://localhost:4500",
   "private": true,
   "dependencies": {
     "@testing-library/react": "^11.2.5",
