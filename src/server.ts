@@ -20,6 +20,8 @@ import { getUser, createUser } from './stores/users'
 import { connectdb } from './connectdb'
 import { createHash } from 'crypto'
 
+import authRouter from './routes/authRoutes'
+
 const showdown = require('showdown')
 connectdb()
 
@@ -34,6 +36,8 @@ app.use(userMiddleware)
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, '/views'))
+
+app.use('/api', authRouter)
 
 // Get routes
 app.get('/', (req, res) => {
