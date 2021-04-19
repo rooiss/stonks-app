@@ -55,6 +55,7 @@ router.post(
     }
     if (errors.length) {
       res.json({ errors, success: false })
+      return
     }
     await createUser({
       username: newUser.username,
@@ -66,4 +67,8 @@ router.post(
     res.json({ username: newUser.username, success: true })
   }),
 )
+
+router.get('/whoami', (req, res) => {
+  res.json({ user: (req as any).user })
+})
 export default router

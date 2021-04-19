@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
+import React /* , { useContext } */ from 'react'
 import { createUseStyles } from 'react-jss'
-import { AuthContext } from './AuthContext'
+// import { AuthContext } from './AuthContext'
 
 const useStyles = createUseStyles(
   {
@@ -40,7 +40,7 @@ const useStyles = createUseStyles(
 interface LoginProps {}
 export const Login = ({}: LoginProps) => {
   const classes = useStyles()
-  const { auth, setAuth } = useContext(AuthContext)
+  // const { auth, setAuth } = useContext(AuthContext)
 
   return (
     <div className={classes.root}>

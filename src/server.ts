@@ -6,7 +6,7 @@ const { asyncHandler } = require('./utils/asyncHandler')
 const { cookieParser } = require('./middleware/cookieParser')
 import { createSession } from './stores/sessions'
 const { sessionMiddleware } = require('./middleware/sessionMiddleware')
-const { userMiddleware } = require('./middleware/userMiddleware')
+import { userMiddleware } from './middleware/userMiddleware'
 import {
   getStonksByUsername,
   upsertStonk,

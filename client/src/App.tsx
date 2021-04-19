@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import { Navbar } from './component/Navbar'
 import { Home } from './component/Home'
@@ -6,7 +6,7 @@ import { Login } from './component/Login'
 import { Signup } from './component/Signup'
 
 import { createUseStyles } from 'react-jss'
-import { AuthContext } from './component/AuthContext'
+import { AuthProvider } from './component/AuthContext'
 
 const useStyles = createUseStyles({
   root: {
@@ -20,10 +20,9 @@ const useStyles = createUseStyles({
 
 function App() {
   const classes = useStyles()
-  const [auth, setAuth] = useState('herro')
 
   return (
-    <AuthContext.Provider value={null}>
+    <AuthProvider>
       <Router>
         <div className={classes.root}>
           <Navbar />
@@ -40,7 +39,7 @@ function App() {
           </Switch>
         </div>
       </Router>
-    </AuthContext.Provider>
+    </AuthProvider>
   )
 }
 
